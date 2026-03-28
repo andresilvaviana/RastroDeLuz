@@ -35,11 +35,21 @@ public class PlayerController : MonoBehaviour
             trailTimer = 0.1f;
         }
     }
+    
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Trail"))
         {
             Debug.Log("Perdeu!");
+            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            Debug.Log("Perdeu para inimigo!");
             UnityEngine.SceneManagement.SceneManager.LoadScene(0);
         }
     }
