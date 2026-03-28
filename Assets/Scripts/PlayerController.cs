@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -17,7 +18,10 @@ public class PlayerController : MonoBehaviour
 
         transform.Translate(move.normalized * speed * Time.deltaTime);
 
-        CreateTrail();
+        if (move != Vector2.zero)
+        {
+            CreateTrail();
+        }
     }
 
     void CreateTrail()
@@ -26,8 +30,18 @@ public class PlayerController : MonoBehaviour
 
         if (trailTimer <= 0)
         {
-            Instantiate(trailPrefab, transform.position, Quaternion.identity);
+            Vector3 offset = new Vector3(-move.x, -move.y, 0) * 0.5f;
+            Instantiate(trailPrefab, transform.position + offset, Quaternion.identity);
             trailTimer = 0.1f;
         }
     }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Trail"))
+        {
+            Debug.Log("Perdeu!");
+            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        }
+    }
+
 }
