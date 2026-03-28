@@ -239,6 +239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  trailPrefab: {fileID: 8397296677155776312, guid: ca39eed43799b51419abadab0e5d4c6c, type: 3}
 --- !u!61 &1878156055
 BoxCollider2D:
   m_ObjectHideFlags: 0
